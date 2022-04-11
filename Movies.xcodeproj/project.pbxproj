@@ -174,8 +174,9 @@
 		84A3B59F280421070081ABF1 /* Repository */ = {
 			isa = PBXGroup;
 			children = (
-				84A3B5A8280422E90081ABF1 /* Model */,
 				84A3B5A0280421170081ABF1 /* CoreData */,
+				84A3B5A8280422E90081ABF1 /* Model */,
+				84A3B5AB280424130081ABF1 /* MovieRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -194,7 +195,6 @@
 			isa = PBXGroup;
 			children = (
 				84A3B5A92804233A0081ABF1 /* MovieResponse.swift */,
-				84A3B5AB280424130081ABF1 /* MovieRepository.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
