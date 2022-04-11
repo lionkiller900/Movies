@@ -22,15 +22,14 @@ class MoviesViewController: UIViewController {
     private var bindings = Set<AnyCancellable>()
     
     let viewModel:MoviesViewModelType = MoviesViewModel(repository: MovieRepository())
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+     
         viewModel.showFavouriteMovies()
         setupBindings()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-
     }
     
     private func setupBindings() {
@@ -117,5 +116,4 @@ extension MoviesViewController: MovieCellDelegate {
         viewModel.markFavourite(movie: movie)
     }
 }
-
 
