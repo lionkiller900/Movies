@@ -9,14 +9,15 @@ import UIKit
 import Combine
 
 class MoviesViewController: UIViewController {
-    
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var searchTextField: UITextField!
     
-   
+    let pendingOperations = PendingOperations()
+
     var movies:[Movie] = []
     
     private var bindings = Set<AnyCancellable>()
@@ -76,6 +77,28 @@ class MoviesViewController: UIViewController {
             self.showAlert(message:error)
         }
     }
+    
+    func startDownload(for movie: Movie, at indexPath: IndexPath) {
+      guard pendingOperations.downloadsInProgress[indexPath] == nil else {
+        return
+      }
+      
+      let downloader = ImageDownloader(movie)
+      downloader.completionBlock = {
+        if downloader.isCancelled {
+          return
+        }
+        
+        DispatchQueue.main.async {
+          self.pendingOperations.downloadsInProgress.removeValue(forKey: indexPath)
+            
+            
+          self.tableView.reloadRows(at: [indexPath], with: .fade)
+        }
+      }
+      pendingOperations.downloadsInProgress[indexPath] = downloader
+      pendingOperations.downloadQueue.addOperation(downloader)
+    }
 }
 
 extension MoviesViewController:UITableViewDataSource {
@@ -88,7 +111,20 @@ extension MoviesViewController:UITableViewDataSource {
             return UITableViewCell()
         }
         cell.delegate = self
-        cell.setData(movie:self.movies[indexPath.row], index: indexPath.row)
+        let movie = self.movies[indexPath.row]
+        cell.setData(movie:movie, index: indexPath.row)
+        
+        switch (movie.state) {
+       
+        case .failed:
+            print("Failed to load")
+        case .new :
+              startDownload(for: movie, at: indexPath)
+          
+        case .downloaded :
+            cell.posterImageView.image = movie.image
+        }
+        
         return cell
     }
 }
@@ -116,4 +152,3 @@ extension MoviesViewController: MovieCellDelegate {
         viewModel.markFavourite(movie: movie)
     }
 }
-

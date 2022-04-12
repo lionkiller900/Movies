@@ -1,8 +1,8 @@
 //
 //  MoviesViewModel.swift
-//  Movies
+//  MoviesCode
 //
-//  Created by Admin on 11/04/2022.
+//  Created by  Donald Daniels on 10/04/2022.
 //
 
 import Foundation
@@ -82,3 +82,4 @@ final class MoviesViewModel: MoviesViewModelType {
         }
     }
 }
+

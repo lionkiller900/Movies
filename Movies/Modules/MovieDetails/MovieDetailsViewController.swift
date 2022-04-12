@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import  Kingfisher
 
 class MovieDetailsViewController: UIViewController {
     
@@ -34,9 +33,10 @@ class MovieDetailsViewController: UIViewController {
         titleLbl.text = viewModel.movie.title
         descLbl.text = viewModel.movie.overView
         reviewsLbl.text = "\(viewModel.movie.reviews)"
-        let url = URL(string:"\(EndPoint.imagesBaseUrl)\(viewModel.movie.poster)")
-        posterImageView.kf.setImage(with: url)
+       
+        posterImageView.image = viewModel.movie.image
     }
+
     
 
     /*

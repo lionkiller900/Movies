@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 protocol MovieCellDelegate: AnyObject {
     func favAction(isSelected:Bool, index:Int)
@@ -46,8 +45,6 @@ class MovieTableViewCell: UITableViewCell {
         titleLbl.text = movie.title
         reviewsCountLbl.text = "Ratings : \(movie.reviews)"
         favButton.tag = index
-        let url = URL(string:"\(EndPoint.imagesBaseUrl)\(movie.poster)")
-        posterImageView.kf.setImage(with: url)
         
         overViewLbl.text = movie.overView
 

@@ -7,6 +7,12 @@
 
 import Foundation
 
+import UIKit
+
+enum MovieRecordState {
+  case new, downloaded, failed
+}
+
 class Movie {
     let movieId: Int
     let title: String
@@ -14,6 +20,8 @@ class Movie {
     let reviews: Int
     let overView: String
     var isFav: Bool
+    var state = MovieRecordState.new
+    var image = UIImage(named: "Placeholder")
     
     init(movieId:Int, title:String, poster:String, reviews:Int, overView: String, isFav:Bool = false) {
         self.movieId = movieId
@@ -24,3 +32,4 @@ class Movie {
         self.isFav =  isFav
     }
 }
+
