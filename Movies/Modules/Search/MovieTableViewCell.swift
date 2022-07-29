@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// This cell is a cloned cell
 
 protocol MovieCellDelegate: AnyObject {
     func favAction(isSelected:Bool, index:Int)
