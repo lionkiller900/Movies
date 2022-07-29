@@ -7,6 +7,7 @@
 
 import Foundation
 
+// This model is  cloned 
 import UIKit
 
 enum MovieRecordState {
